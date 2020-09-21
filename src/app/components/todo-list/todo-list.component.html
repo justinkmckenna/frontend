@@ -4,5 +4,10 @@
 </div>
 
 <ul class="list-unstyled">
-  <li *ngFor="let item of items" class="alert alert-info"><span>{{item.description}}</span></li>
+  <li *ngFor="let item of items$ | async" class="alert" [ngClass]="{'alert-info': !item.completed, 'alert-secondary': item.completed}">
+    <span [ngClass]="{'completed-item' : item.completed}">{{item.description}}</span>
+    <button *ngIf="!item.completed" class="btn btn-sm btn-danger float-right"  (click)="markComplete(item)">x</button>
+  </li>
 </ul>
+
+<button class="btn btn-danger" (click)="removeCompleted()" [disabled]="!(hasCompletedItems$ | async)">Remove Completed Items</button>

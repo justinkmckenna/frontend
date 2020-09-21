@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ToDoListLitem } from 'src/app/models/todo-list-item';
+import { Observable } from 'rxjs';
+import { filter } from 'rxjs/operators';
+import { ToDoListItem, ToDoListItemCreate } from 'src/app/models';
+import { TodoService } from 'src/app/services/todo-service';
 
 @Component({
   selector: 'app-todo-list',
@@ -8,23 +11,30 @@ import { ToDoListLitem } from 'src/app/models/todo-list-item';
 })
 export class TodoListComponent implements OnInit {
 
-  items: ToDoListLitem[] = [
-    {description: 'clean gutters'},
-    {description: 'clean roof'},
-    {description: 'clean floor'},
-  ];
-  constructor() { }
+  items$: Observable<ToDoListItem[]>;
+  hasCompletedItems$: Observable<boolean>;
+
+  constructor(private service: TodoService) { }
 
   ngOnInit(): void {
+    this.items$ = this.service.getToDos();
+    this.hasCompletedItems$ = this.service.hasCompletedItems();
   }
 
   addItem(item: HTMLInputElement): void {
-    const newItem: ToDoListLitem = {
-      description: item.value
+    const newItem: ToDoListItemCreate = {
+      description: item.value,
     }
-    this.items = [newItem, ...this.items];
     item.value = '';
     item.focus();
+    this.service.addToDo(newItem);
   }
 
+  markComplete(item: ToDoListItem): void {
+    this.service.markComplete(item);
+  }
+
+  removeCompleted(): void {
+    this.service.removeCompleted();
+  }
 }
