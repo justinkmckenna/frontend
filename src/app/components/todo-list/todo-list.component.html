@@ -1,0 +1,8 @@
+<div class="form-group">
+  <input type="text" #item class="form-control mb-3">
+  <button (click)="addItem(item)" class="btn btn-primary">Add</button>
+</div>
+
+<ul class="list-unstyled">
+  <li *ngFor="let item of items" class="alert alert-info"><span>{{item.description}}</span></li>
+</ul>
