@@ -1,22 +1,25 @@
-import { Action } from '@ngrx/store';
+import { state } from '@angular/animations';
+import { Action, createReducer, on } from '@ngrx/store';
+import * as counterActions from '../actions/counter.actions';
 
 export interface CounterState {
   current: number;
+  by: number;
 }
 
 const initialState: CounterState = {
-  current: 0
+  current: 0,
+  by: 1
 };
 
-export function reducer(state: CounterState = initialState, action: Action): CounterState {
-  switch(action.type) {
-    case 'increment':
-      return { current: state.current + 1 };
-    case 'decrement':
-      return { current: state.current - 1 };
-    case 'reset':
-      return { current: 0 };
-    default:
-      return state;
-  }
+const reducerFunction = createReducer(
+  initialState,
+  on(counterActions.countDecremented, (oldState) => ({ ...oldState, current: oldState.current - oldState.by })),
+  on(counterActions.countIncremented, (oldState) => ({ ...oldState, current: oldState.current + oldState.by })),
+  on(counterActions.countBySet, (oldState, action) => ({ ...oldState, by: action.by })),
+  on(counterActions.countReset, () => ( initialState ))
+)
+
+export function reducer(counterState: CounterState = initialState, action: Action): CounterState {
+  return reducerFunction(counterState, action);
 }

@@ -2,4 +2,6 @@
 <span>{{current$ | async}}</span>
 <button (click)="increment()" class="btn btn-primary">+</button>
 <br>
-<button (click)="reset()" class="btn btn-danger">reset</button>
+<button (click)="reset()"  [disabled]="(current$ | async) === 0" class="btn btn-danger">reset</button>
+<br>
+<app-count-by></app-count-by>
