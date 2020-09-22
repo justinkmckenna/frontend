@@ -17,7 +17,7 @@ export class TodoService {
     // go to the api and get the data and cache it here
   }
 
-  getToDos() {
+  getToDos(): Observable<ToDoListItem[]> {
     return this.subject.asObservable();
     // if some component wants to observe (look but dont change) this data they will call this
   }
@@ -53,7 +53,6 @@ export class TodoService {
 
   getDashboard(): Observable<ToDoDashboard> {
     return this.subject.pipe(
-      map(items => items as ToDoListItem[]),
       map(items => {
         return {
           totalTodos: items.length,
