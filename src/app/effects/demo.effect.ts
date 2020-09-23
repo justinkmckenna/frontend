@@ -7,7 +7,7 @@ export class DemoEffects {
 
   logIt$ = createEffect(() => this.actions$.pipe(
     map(a => a.type),
-    tap(t => console.log(`Action of type: ${t}`))
+    // tap(t => console.log(`Action of type: ${t}`))
   ), { dispatch: false });
 
   constructor(private actions$: Actions) { }

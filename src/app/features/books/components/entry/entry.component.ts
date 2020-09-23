@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { bookCreated } from '../../actions/book.actions';
-import { BooksState } from '../../reducers';
+import { BookListItem } from '../../models/book-list-item';
+import { BooksState, selectBookListItems } from '../../reducers';
 import { BookListState } from '../../reducers/books.reducers';
 
 @Component({

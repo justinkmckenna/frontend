@@ -5,7 +5,7 @@ let currentId = 1;
 
 export const bookCreated = createAction(
   '[books] book created',
-  ({ title, author, numberOfPages }: { title: string, author: string, numberOfPages: number }) => ({
+  ({ title, author, numberOfPages }: BookCreate) => ({
     payload: {
       title,
       author,
@@ -14,3 +14,9 @@ export const bookCreated = createAction(
     } as BookEntity
   })
 );
+
+interface BookCreate {
+  title: string;
+  author: string;
+  numberOfPages: number;
+}
