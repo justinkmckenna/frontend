@@ -1,5 +1,6 @@
 import { EntityState, createEntityAdapter } from '@ngrx/entity';
-import { createReducer, Action } from '@ngrx/store';
+import { createReducer, Action, on } from '@ngrx/store';
+import * as actions from '../actions/book.actions';
 
 export interface BookEntity {
   id: string;
@@ -25,9 +26,10 @@ const initialState: BookListState = {
 }
 
 const reducerFunction = createReducer(
-  initialState
+  initialState,
+  on(actions.bookCreated, (oldState, action) => adapter.addOne(action.payload, oldState))
 );
 
-export function reducer(state: BookListState = initialState, action: Action) {
+export function reducer(state: BookListState = initialState, action: Action): BookListState {
   return reducerFunction(state, action);
 }
