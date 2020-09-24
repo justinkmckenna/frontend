@@ -15,8 +15,35 @@ export const bookCreated = createAction(
   })
 );
 
+export const bookCreatedSuccess = createAction(
+  '[books] book created success',
+  props<{oldId: string, payload: BookEntity}>()
+);
+
+export const bookCreatedFailure = createAction(
+  '[books] book created failure',
+  props<{message: string, payload: BookEntity}>()
+);
+
 interface BookCreate {
   title: string;
   author: string;
   numberOfPages: number;
 }
+
+// initiaing action - go do this thing
+export const loadBookData = createAction(
+  '[books] load book data'
+);
+
+// a success action - the thing worked
+export const loadBookDataSuccess = createAction(
+  '[books] load books success',
+  props<{payload: BookEntity[]}>()
+);
+
+// a fail action - that did not work
+export const loadBookDataFailed = createAction(
+  '[books] load books failed',
+  props<{message: string}>()
+);
