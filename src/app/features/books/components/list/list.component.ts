@@ -1,11 +1,9 @@
-// This is a presentational component (or dumb component)
-// It just gets data from its parent and presents it
-
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { removeBook, updateBookTitle } from '../../actions/book.actions';
 import { BookListItem } from '../../models/book-list-item';
-import { BooksState, selectBookListItems } from '../../reducers';
+import { BooksState } from '../../reducers';
+import { BookEntity } from '../../reducers/books.reducers';
 
 @Component({
   selector: 'app-list',
@@ -16,6 +14,7 @@ import { BooksState, selectBookListItems } from '../../reducers';
 export class ListComponent implements OnInit {
 
   @Input() books: BookListItem[];
+  isEditing: string = null;
 
   constructor(private store: Store<BooksState>) { }
 
@@ -23,4 +22,20 @@ export class ListComponent implements OnInit {
 
   }
 
+  removeBook(book: BookEntity): void {
+    this.store.dispatch(removeBook({payload: book}));
+  }
+
+  edit(bookId: string): void {
+    this.isEditing = bookId;
+  }
+
+  stopEditing(): void {
+    this.isEditing = null;
+  }
+
+  updateTitle(newTitle: string, book: BookEntity): void {
+    this.store.dispatch(updateBookTitle({newTitle, payload: book}));
+    this.isEditing = null;
+  }
 }

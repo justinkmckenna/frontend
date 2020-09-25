@@ -10,4 +10,4 @@
   </li>
 </ul>
 
-<button class="btn btn-danger" (click)="removeCompleted()" [disabled]="!(hasCompletedItems$ | async)">Remove Completed Items</button>
+<button class="btn btn-danger" (click)="removeCompleted()" [disabled]="(hasCompletedItems$ | async) === false">Remove Completed Items</button>

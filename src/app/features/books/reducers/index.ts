@@ -40,3 +40,4 @@ export const selectBookListItems = createSelector(selectBookListItemsUnsorted, s
   })]);
 export const selectSortByTitle = createSelector(selectSortingBy, b => b === 'title');
 export const selectSortByAuthor = createSelector(selectSortingBy, b => b === 'author');
+export const selectBooksLoaded = createSelector(selectUiHintsBranch, b => b.booksLoaded);

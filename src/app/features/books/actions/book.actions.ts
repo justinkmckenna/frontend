@@ -47,3 +47,23 @@ export const loadBookDataFailed = createAction(
   '[books] load books failed',
   props<{message: string}>()
 );
+
+export const removeBook = createAction(
+  '[books] remove book',
+  props<{payload: BookEntity}>()
+);
+
+export const removeBookFailed = createAction(
+  '[books] remove book failed',
+  props<{errorMessage: string, payload: BookEntity}>()
+);
+
+export const updateBookTitle = createAction(
+  '[books] updated book title',
+  props<{newTitle: string, payload: BookEntity}>()
+);
+
+export const updateBookTitleFailed = createAction(
+  '[books] updated book title failed',
+  props<{errorMessage: string, payload: BookEntity}>()
+);

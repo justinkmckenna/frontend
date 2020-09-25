@@ -12,7 +12,7 @@ import { BookListComponent } from './components/book-list/book-list.component';
 import { BookSorterComponent } from './components/book-sorter/book-sorter.component';
 import { EffectsModule } from '@ngrx/effects';
 import { BooksAppEffects } from './effects/books-app.effects';
-import {HttpClientModule} from '@angular/common/http'
+import {HttpClientModule} from '@angular/common/http';
 import { BookEffects } from './effects/book.effects';
 
 const routes: Routes = [
